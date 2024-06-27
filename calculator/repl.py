@@ -1,10 +1,10 @@
-from calculator import Calculator, HistoryManager, PluginManager
+from calculator.calculator import Calculator
+from calculator.history_manager import HistoryManager
 from calculator.logging_config import logger
 
 def repl():
     calculator = Calculator()
     history_manager = HistoryManager()
-    plugin_manager = PluginManager()
     while True:
         command = input("> ").strip().lower()
         if command in ['exit', 'quit']:

@@ -1,5 +1,10 @@
+import sys
+import os
+print(sys.path)
+
 import pytest
 from calculator import Calculator
+
 
 def test_add():
     calc = Calculator()
