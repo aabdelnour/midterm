@@ -1,10 +1,11 @@
-import sys
 import os
-print(sys.path)
-
+import sys
 import pytest
-from calculator import Calculator
 
+# Add the parent directory of 'calculator' to sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from calculator.calculator_core import Calculator
 
 def test_add():
     calc = Calculator()
