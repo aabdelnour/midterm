@@ -2,11 +2,7 @@ import os
 import sys
 import pytest
 
-# Add the parent directory of 'calculator' to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from calculator.calculator_core import Calculator
-
+from app.calculator import Calculator
 def test_add():
     calc = Calculator()
     assert calc.add(1, 2) == 3
