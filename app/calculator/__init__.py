@@ -1,8 +1,6 @@
-
 import logging
-
-
 mylogger = logging.getLogger("calculator")
+logging.basicConfig(level=logging.INFO)
 
 class Calculator:
     def add(self, x, y):
@@ -25,5 +23,5 @@ class Calculator:
             mylogger.error("Divide: Division by zero error")
             raise ValueError("Cannot divide by zero")
         result = x / y
-        logger.info(f"Divide: {x} / {y} = {result}")
+        mylogger.info(f"Divide: {x} / {y} = {result}")
         return result
