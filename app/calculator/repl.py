@@ -1,5 +1,4 @@
 import logging
-import logging
 from app import Calculator
 from history_manager import HistoryManager
 
