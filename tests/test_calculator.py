@@ -1,36 +1,50 @@
 import pytest
 import logging
+import os
 from app.calculator import Calculator
 
-logger = logging.getLonger(__name__)
+if not os.path.exists('logs'):
+    os.makedirs('logs')
 
-def setup_logging(tmpdir_factory):
-    log_file = tmpdir_factory.mktemp("logs").join("test_app.log")
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        filename=str(log_file),
-        filemode='w'
-    )
-    return log_file
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='logs/app.log',
+    filemode='a'
+)
 
-def test_add():
-    calc = Calculator()
-    assert calc.add(1, 2) == 3
+logger = logging.getLogger(__name__)
 
-def test_subtract():
-    calc = Calculator()
-    assert calc.subtract(2, 1) == 1
+@pytest.fixture
+def calc():
+    return Calculator()
 
-def test_multiply():
-    calc = Calculator()
-    assert calc.multiply(2, 3) == 6
+def test_add(calc: Calculator):
+    logger.info("Running add test")
+    result = calc.add(1, 2)
+    assert result == 3
+    logger.info(f"Add test result: {result}")
 
-def test_divide():
-    calc = Calculator()
-    assert calc.divide(6, 2) == 3
+def test_subtract(calc: Calculator):
+    logger.info("Running subtract test")
+    result = calc.subtract(2, 1)
+    assert result == 1
+    logger.info(f"Subtract test result: {result}")
 
-def test_divide_by_zero():
-    calc = Calculator()
+def test_multiply(calc: Calculator):
+    logger.info("Running multiply test")
+    result = calc.multiply(2, 3)
+    assert result == 6
+    logger.info(f"Multiply test result: {result}")
+
+def test_divide(calc: Calculator):
+    logger.info("Running divide test")
+    result = calc.divide(6, 2)
+    assert result == 3
+    logger.info(f"Divide test result: {result}")
+
+def test_divide_by_zero(calc: Calculator):
+    logger.info("Running divide by zero test")
     with pytest.raises(ValueError):
         calc.divide(1, 0)
+    logger.info("Divide by zero test completed")
